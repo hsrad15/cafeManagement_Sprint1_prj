@@ -1,4 +1,5 @@
 package com.cafe;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,119 +10,150 @@ public class App {
 
     public static void main(String[] args) {
 
-        @SuppressWarnings("resource")
-		Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
         cafeDaoimp cafe = new cafeDaoimp();
 
         int ch;
 
+        System.out.println("---------------------------------------");
+        System.out.println("       WELCOME TO OUR CAFE!");
+        System.out.println("   Fresh Taste, Happy Moments!");
+        System.out.println("---------------------------------------");
+
         do {
 
-            System.out.println("**** Cafe Management System ****");
-            System.out.println("1. Add item");
-            System.out.println("2. Read All items");
-            System.out.println("3. Update item Details");
-            System.out.println("4. Delete item");
+            System.out.println("\n******** CAFE MANAGEMENT SYSTEM ********");
+            System.out.println("1. Add Item");
+            System.out.println("2. Read All Items");
+            System.out.println("3. Update Item Details");
+            System.out.println("4. Delete Item");
             System.out.println("5. Exit");
+            System.out.println("---------------------------------------");
 
-            System.out.println("Enter choice:");
+            System.out.print("Enter your choice: ");
             ch = sc.nextInt();
 
             switch (ch) {
 
-            
             case 1:
 
-                System.out.println("Enter item Name:");
+                System.out.println("\n---------- ADD CAFE ITEM ----------");
+
+                System.out.print("Enter item Name: ");
                 String name = sc.next();
 
-                System.out.println("Enter item Price:");
+                System.out.print("Enter item Price: ");
                 double price = sc.nextDouble();
 
-                System.out.println("Enter item Quantity:");
+                System.out.print("Enter item Quantity: ");
                 int quantity = sc.nextInt();
 
-                System.out.println("Enter item Category:");
+                System.out.print("Enter item Category: ");
                 String category = sc.next();
 
                 cafe item = new cafe(name, price, quantity, category);
+
                 System.out.println("---------------------------------------");
+
                 cafe.addcafe(item);
-                
-                System.out.println("Total="+ quantity*price);
+
+                System.out.println("Item Total Value = ₹" + (quantity * price));
+
+                System.out.println("Item added successfully!");
                 System.out.println("---------------------------------------");
+
                 break;
 
-
-            
             case 2:
+
+                System.out.println("\n---------- CAFE MENU ----------");
 
                 List<cafe> cafes = cafe.getAllCafe();
 
-                for (cafe c : cafes) {
+                if (cafes == null || cafes.isEmpty()) {
 
-                    System.out.println(c);
+                    System.out.println("No cafe items available.");
+
+                } else {
+
+                    for (cafe c : cafes) {
+                        System.out.println(c);
+                    }
 
                 }
 
+                System.out.println("---------------------------------------");
+
                 break;
 
-
-            
             case 3:
 
-                System.out.println("Enter item Id:");
+                System.out.println("\n---------- UPDATE CAFE ITEM ----------");
+
+                System.out.print("Enter item Id: ");
                 int id = sc.nextInt();
 
-                System.out.println("Enter new item Name:");
+                System.out.print("Enter new item Name: ");
                 String uname = sc.next();
 
-                System.out.println("Enter new Price:");
+                System.out.print("Enter new Price: ");
                 double uprice = sc.nextDouble();
 
-                System.out.println("Enter new Quantity:");
+                System.out.print("Enter new Quantity: ");
                 int uquantity = sc.nextInt();
 
-                System.out.println("Enter new Category:");
+                System.out.print("Enter new Category: ");
                 String ucategory = sc.next();
 
                 cafe updatedCafe =
                         new cafe(id, uname, uprice, uquantity, ucategory);
+
                 System.out.println("---------------------------------------");
+
                 cafe.updateCafe(updatedCafe);
-               
-                System.out.println("Total="+ uquantity*uprice);
+
+                System.out.println("Updated Item Total Value = ₹"
+                        + (uquantity * uprice));
+
+                System.out.println("Update operation completed.");
                 System.out.println("---------------------------------------");
+
                 break;
 
-
-            
             case 4:
 
-                System.out.println("Enter Cafe Id which you want to delete:");
+                System.out.println("\n---------- DELETE CAFE ITEM ----------");
 
+                System.out.print("Enter Cafe Id which you want to delete: ");
                 int deletedId = sc.nextInt();
 
                 cafe.deleteCafe(deletedId);
 
+                System.out.println("---------------------------------------");
+
                 break;
 
-
-            
             case 5:
 
-                System.out.println("Exit");
+                System.out.println("\n========================================");
+                System.out.println("       THANK YOU FOR VISITING!");
+                System.out.println("          VISIT US AGAIN!");
+                System.out.println("========================================");
+                System.out.println("   We hope you have a wonderful day!");
+                System.out.println("");
 
                 break;
-
 
             default:
 
-                System.out.println("Wrong choice.........");
+                System.out.println("Invalid choice! Please try again.");
+
             }
 
         } while (ch != 5);
+
+        sc.close();
 
     }
 }
